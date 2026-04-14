@@ -26,10 +26,6 @@ Designed with clarity, performance, and refined UI principles.
 
 * Client-side shopping cart
 * Add to cart interaction
-* Product availability states:
-
-  * In stock
-  * Sold out
 * Slide-in cart panel
 * Checkout modal interface
 
@@ -64,49 +60,24 @@ README.md    # Documentation
 
 ---
 
-## <i data-lucide="rocket"></i> Getting Started
+This portfolio includes:
 
-### Clone the repository
+* A cookie-clicker game
+* A personal libray
+* A event booking website
+* A personal finance guidance site
+* A private organisation management app
+  
+* A simulated e-commerce experience:
 
-```bash
-git clone https://github.com/your-username/your-repo.git
-```
-
-### Open locally
-
-Open the file directly in your browser:
-
-```bash
-open index.html
-```
-
-No build tools or dependencies required.
-
----
-
-## <i data-lucide="settings"></i> Configuration
-
-### GitHub Projects
-
-Update your GitHub username inside the script:
-
-```js
-const username = "your-github-username";
-```
-
----
-
-## <i data-lucide="shopping-bag"></i> Demo Notes
-
-This project includes a simulated e-commerce experience:
-
+* Complete and ready online store
+* Product selection, wishlist, add product to basket
 * Cart and checkout are frontend-only
 * Payments are not processed
 * No real transactions occur
 
 ---
-
-## <i data-lucide="target"></i> Future Improvements
+Improvement and add-ons in the future:
 
 * Stripe integration for real payments
 * Product categories and filters
@@ -139,4 +110,4 @@ This project is available under the MIT License.
 
 ## <i data-lucide="star"></i> Final Note
 
-This project combines a portfolio and a demo product experience into a single interface, focusing on structure, performance, and modern UI clarity.
+My portfolio projects combines a portfolio and demo product experience into a single interface, focusing on structure, performance, and modern UI clarity.
