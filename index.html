@@ -2,348 +2,355 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Angela Guilherme | Web Developer Portfolio</title>
+<title>Angela Guilherme | Full Stack Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 /* =========================
-   ROOT THEME
+   ROOT THEME (FRAMER STYLE LIGHT FIRST)
 ========================= */
-:root {
-  --bg1: #0f172a;
-  --bg2: #1e1b4b;
-  --card: rgba(255,255,255,0.08);
-  --text: #e2e8f0;
-  --muted: #94a3b8;
-  --accent1: #6366f1;
-  --accent2: #ec4899;
+:root{
+  --bg:#f8fafc;
+  --panel:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:rgba(15,23,42,0.08);
+  --accent:#6366f1;
+  --accent2:#ec4899;
 }
 
-body.light {
-  --bg1: #f8fafc;
-  --bg2: #eef2ff;
-  --card: rgba(255,255,255,0.6);
-  --text: #0f172a;
-  --muted: #475569;
+body.dark{
+  --bg:#0b1020;
+  --panel:#0f172a;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+  --border:rgba(255,255,255,0.08);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.4s ease;
+  overflow-x:hidden;
+}
+
+/* soft background blobs (very subtle like Framer) */
+.blob{
+  position:fixed;
+  width:500px;
+  height:500px;
+  filter:blur(140px);
+  opacity:0.25;
+  z-index:0;
+}
+
+.blob.one{background:#6366f1;top:-150px;left:-120px;}
+.blob.two{background:#ec4899;bottom:-200px;right:-120px;}
+
+/* =========================
+   NAV
+========================= */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(10px);
+  background:color-mix(in srgb, var(--bg) 80%, transparent);
+  border-bottom:1px solid var(--border);
+  z-index:10;
+}
+
+nav h1{
+  font-size:16px;
+  margin:0;
+  font-weight:600;
+}
+
+nav button{
+  border:none;
+  background:var(--panel);
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  border:1px solid var(--border);
 }
 
 /* =========================
-   GLOBAL
+   HERO (FRAMER STYLE)
 ========================= */
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  color: var(--text);
-  background: radial-gradient(circle at 20% 20%, #6366f1 0%, transparent 40%),
-              radial-gradient(circle at 80% 80%, #ec4899 0%, transparent 40%),
-              linear-gradient(135deg, var(--bg1), var(--bg2));
-  overflow-x: hidden;
-  transition: 0.4s ease;
+.hero{
+  padding:120px 40px 60px;
+  max-width:1100px;
+  margin:auto;
+  position:relative;
+  z-index:2;
 }
 
-/* cursor glow */
-.cursor {
-  position: fixed;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+.hero h2{
+  font-size:56px;
+  line-height:1.1;
+  margin:0;
 }
 
-/* floating blobs */
-.blob {
-  position: fixed;
-  width: 400px;
-  height: 400px;
-  filter: blur(120px);
-  opacity: 0.35;
-  z-index: 0;
-  animation: float 12s infinite ease-in-out;
-}
-
-.blob.one { background: #6366f1; top: -100px; left: -100px; }
-.blob.two { background: #ec4899; bottom: -120px; right: -120px; }
-
-@keyframes float {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(40px); }
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  margin-top:15px;
+  max-width:600px;
 }
 
 /* =========================
-   HEADER / HERO
+   SECTION WRAPPER
 ========================= */
-header {
-  text-align: center;
-  padding: 100px 20px 40px;
-  position: relative;
-  z-index: 2;
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 40px;
+  position:relative;
+  z-index:2;
 }
 
-h1 {
-  font-size: 3.5rem;
-  margin: 0;
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-header p {
-  color: var(--muted);
-  font-size: 1.2rem;
-}
-
-/* controls */
-.controls {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-input, button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  font-size: 0.9rem;
-}
-
-input {
-  width: 220px;
-  background: var(--card);
-  color: var(--text);
-  backdrop-filter: blur(10px);
-}
-
-button {
-  cursor: pointer;
-  background: linear-gradient(135deg, var(--accent1), var(--accent2));
-  color: white;
-  transition: 0.2s;
-}
-
-button:hover {
-  transform: translateY(-2px);
+.section-title{
+  font-size:14px;
+  letter-spacing:1px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:20px;
 }
 
 /* =========================
-   GRID
+   SERVICES (FRAMER STYLE CARDS)
 ========================= */
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-  position: relative;
-  z-index: 2;
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+.service-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  transition:0.3s ease;
+}
+
+.service-card:hover{
+  transform:translateY(-6px);
+}
+
+.service-card i{
+  width:22px;
+  height:22px;
+  color:var(--accent);
+}
+
+.service-card h3{
+  margin:10px 0 8px;
+  font-size:16px;
+}
+
+.service-card p{
+  color:var(--muted);
+  font-size:14px;
 }
 
 /* =========================
-   CARD (GLASS PREMIUM)
+   PROJECTS (FRAMER-STYLE ALIGNMENT GRID)
 ========================= */
-.card {
-  background: var(--card);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  overflow: hidden;
-  backdrop-filter: blur(14px);
-  transform: translateY(40px);
-  opacity: 0;
-  transition: 0.4s ease;
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
 }
 
-.card.show {
-  transform: translateY(0);
-  opacity: 1;
+.project{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  transition:0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-10px) scale(1.02);
+.project:hover{
+  transform:translateY(-6px);
 }
 
-.card img {
-  width: 100%;
-  height: 170px;
-  object-fit: cover;
-  transition: 0.4s;
+.project img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
 }
 
-.card:hover img {
-  transform: scale(1.05);
+.project-content{
+  padding:14px;
 }
 
-.card-content {
-  padding: 18px;
+.project h4{
+  margin:0;
+  font-size:15px;
 }
 
-.card h3 {
-  margin: 0 0 8px;
-  font-size: 1.2rem;
+.project p{
+  font-size:13px;
+  color:var(--muted);
 }
 
-.card p {
-  font-size: 0.9rem;
-  color: var(--muted);
+a{
+  text-decoration:none;
+  color:inherit;
 }
 
 /* buttons */
-.actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-  flex-wrap: wrap;
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
 }
 
-a.btn {
-  padding: 8px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.8rem;
-  transition: 0.2s;
+.btn{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:8px;
+  border:1px solid var(--border);
 }
 
-a.primary {
-  background: linear-gradient(135deg, var(--accent1), var(--accent2));
-  color: white;
-}
-
-a.secondary {
-  background: rgba(255,255,255,0.1);
-  color: var(--text);
-}
-
-a.btn:hover {
-  transform: translateY(-2px);
+.primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:white;
+  border:none;
 }
 
 /* =========================
-   FOOTER
+   CONTACT
 ========================= */
-footer {
-  text-align: center;
-  padding: 50px;
-  color: var(--muted);
+.contact{
+  text-align:left;
+}
+
+.email{
+  font-size:18px;
+  font-weight:500;
+  color:var(--accent);
 }
 
 /* =========================
-   THEME TOGGLE
+   ANIMATION
 ========================= */
-.toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
+.fade{
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 0.6s forwards;
+}
+
+@keyframes fadeUp{
+  to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="cursor"></div>
 <div class="blob one"></div>
 <div class="blob two"></div>
 
-<button class="toggle" onclick="toggleTheme()">🌙</button>
-
-<header>
+<!-- NAV -->
+<nav>
   <h1>Angela Guilherme</h1>
-  <p>Ultra Premium Developer Portfolio</p>
+  <button onclick="toggleTheme()">Toggle</button>
+</nav>
 
-  <div class="controls">
-    <input id="search" placeholder="Search projects..." />
-  </div>
-</header>
-
-<div class="container">
-  <div class="grid" id="repos"></div>
+<!-- HERO -->
+<div class="hero fade">
+  <h2>Full Stack Web Developer</h2>
+  <p>Building modern, scalable and beautifully crafted web experiences with clean architecture and UI systems.</p>
 </div>
 
-<footer>© 2026 Angela Guilherme — Crafted with precision. </footer>
+<!-- SERVICES -->
+<section>
+  <div class="section-title">Services</div>
+
+  <div class="services">
+
+    <div class="service-card fade">
+      <i data-lucide="smartphone"></i>
+      <h3>App Development</h3>
+      <p>Development of applications for PWA, Android and iOS.</p>
+    </div>
+
+    <div class="service-card fade">
+      <i data-lucide="code-2"></i>
+      <h3>Web Development</h3>
+      <p>High-quality professional websites with modern stacks.</p>
+    </div>
+
+    <div class="service-card fade">
+      <i data-lucide="pen-tool"></i>
+      <h3>UI/UX Design</h3>
+      <p>Clean and thoughtful design systems focused on usability.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+  <div class="section-title">Projects</div>
+  <div class="projects" id="repos"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div class="section-title">Contact</div>
+  <p class="email">angela.guilherme@live.com</p>
+</section>
 
 <script>
-const username = "angelaguilherme-Lo";
-const container = document.getElementById("repos");
-let reposData = [];
+const username="angelaguilherme-Lo";
 
-/* cursor glow */
-document.addEventListener("mousemove", e => {
-  const cursor = document.querySelector(".cursor");
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-
-/* theme toggle */
-function toggleTheme() {
-  document.body.classList.toggle("light");
+/* theme */
+function toggleTheme(){
+  document.body.classList.toggle("dark");
 }
 
-/* fetch repos */
+/* lucide icons */
+lucide.createIcons();
+
+/* repos */
 fetch(`https://api.github.com/users/${username}/repos`)
-.then(r => r.json())
-.then(data => {
-  reposData = data.filter(r => !r.fork);
-  render(reposData);
-});
+.then(r=>r.json())
+.then(data=>{
+  const container=document.getElementById("repos");
 
-/* render */
-function render(data) {
-  container.innerHTML = "";
+  data.filter(r=>!r.fork).forEach(repo=>{
+    const div=document.createElement("div");
+    div.className="project fade";
 
-  data.forEach((repo, i) => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
+    div.innerHTML=`
       <img src="https://opengraph.githubassets.com/1/${username}/${repo.name}">
-      <div class="card-content">
-        <h3>${repo.name}</h3>
-        <p>${repo.description || "No description available"}</p>
+      <div class="project-content">
+        <h4>${repo.name}</h4>
+        <p>${repo.description||"No description"}</p>
 
         <div class="actions">
           <a class="btn primary" href="${repo.html_url}" target="_blank">GitHub</a>
-          ${repo.homepage ? `<a class="btn secondary" href="${repo.homepage}" target="_blank">Live</a>` : ""}
+          ${repo.homepage?`<a class="btn" href="${repo.homepage}" target="_blank">Live</a>`:""}
         </div>
       </div>
     `;
 
-    container.appendChild(card);
-
-    setTimeout(() => card.classList.add("show"), i * 60);
+    container.appendChild(div);
   });
-
-  observe();
-}
-
-/* scroll reveal */
-function observe() {
-  const cards = document.querySelectorAll(".card");
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add("show");
-    });
-  });
-
-  cards.forEach(c => io.observe(c));
-}
-
-/* search filter */
-document.getElementById("search").addEventListener("input", e => {
-  const val = e.target.value.toLowerCase();
-  const filtered = reposData.filter(r =>
-    r.name.toLowerCase().includes(val)
-  );
-  render(filtered);
 });
 </script>
 
