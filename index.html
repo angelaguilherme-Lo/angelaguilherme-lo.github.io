@@ -9,15 +9,21 @@
 
 <style>
 /* =========================
-   DESIGN SYSTEM (APPLE STYLE)
+   DESIGN SYSTEM (WARM APPLE STYLE)
 ========================= */
 :root{
   --bg:#ffffff;
-  --panel:rgba(255,255,255,0.7);
+  --panel:rgba(255,255,255,0.72);
   --text:#0a0a0a;
   --muted:#6b7280;
   --border:rgba(0,0,0,0.08);
-  --accent:#0071e3; /* Apple-like blue */
+
+  /* 🌈 Warm premium accents */
+  --accent:#ff5c7a;
+  --accent2:#ffb86b;
+  --accent3:#7c83ff;
+
+  --gradient: linear-gradient(135deg, #ff5c7a, #ffb86b, #7c83ff);
 }
 
 body.dark{
@@ -26,6 +32,8 @@ body.dark{
   --text:#f5f5f7;
   --muted:#9aa0a6;
   --border:rgba(255,255,255,0.08);
+
+  --gradient: linear-gradient(135deg, #ff5c7a, #ffb86b, #7c83ff);
 }
 
 *{box-sizing:border-box}
@@ -42,19 +50,24 @@ body{
   overflow-x:hidden;
 }
 
-/* soft background (VERY subtle) */
+/* =========================
+   BACKGROUND GLOW (WARM GRADIENT FIELD)
+========================= */
 .bg{
   position:fixed;
   inset:0;
   pointer-events:none;
   z-index:0;
+
   background:
-    radial-gradient(circle at 20% 10%, rgba(0,113,227,0.08), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(255,45,85,0.06), transparent 45%);
+    radial-gradient(circle at 15% 20%, rgba(255,92,122,0.18), transparent 45%),
+    radial-gradient(circle at 85% 30%, rgba(255,184,107,0.16), transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(124,131,255,0.14), transparent 55%),
+    linear-gradient(180deg, #ffffff, #f8fafc);
 }
 
 /* =========================
-   NAV (Apple clean bar)
+   NAV (APPLE GLASS BAR)
 ========================= */
 nav{
   position:sticky;
@@ -64,7 +77,8 @@ nav{
   justify-content:space-between;
   align-items:center;
   padding:14px 28px;
-  background:rgba(255,255,255,0.6);
+
+  background:rgba(255,255,255,0.75);
   backdrop-filter:saturate(180%) blur(18px);
   border-bottom:1px solid var(--border);
 }
@@ -104,7 +118,7 @@ button{
 }
 
 /* =========================
-   HERO (Apple style minimal)
+   HERO
 ========================= */
 .hero{
   max-width:900px;
@@ -128,7 +142,7 @@ button{
 }
 
 /* =========================
-   SECTION SYSTEM (controlled motion)
+   SECTION SYSTEM
 ========================= */
 section{
   max-width:1100px;
@@ -153,7 +167,7 @@ section.show{
 }
 
 /* =========================
-   SERVICES (Apple cards)
+   SERVICES
 ========================= */
 .grid-3{
   display:grid;
@@ -181,7 +195,7 @@ section.show{
 }
 
 /* =========================
-   PROJECTS (Apple clean grid)
+   PROJECTS
 ========================= */
 .projects{
   display:grid;
@@ -199,6 +213,7 @@ section.show{
 
 .project:hover{
   transform:translateY(-4px);
+  box-shadow:0 20px 50px rgba(255,92,122,0.08);
 }
 
 .project img{
@@ -242,9 +257,10 @@ a{
 }
 
 .primary{
-  background:var(--accent);
+  background:var(--gradient);
   color:white;
   border:none;
+  box-shadow:0 8px 20px rgba(255,92,122,0.18);
 }
 
 /* =========================
@@ -256,8 +272,10 @@ a{
 
 .email{
   font-size:18px;
-  color:var(--accent);
-  font-weight:500;
+  font-weight:600;
+  background:var(--gradient);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 </style>
 </head>
@@ -280,7 +298,7 @@ a{
 <!-- HERO -->
 <div class="hero">
   <h2>Full Stack Web Developer</h2>
-  <p>Designing and building refined, high-performance digital products with a focus on clarity, structure, and user experience.</p>
+  <p>Designing and building refined, high-performance digital products with clarity, structure, and warm modern aesthetics.</p>
 </div>
 
 <!-- SERVICES -->
@@ -291,7 +309,7 @@ a{
     <div class="card">
       <i data-lucide="smartphone"></i>
       <h3>App Development</h3>
-      <p>PWA, Android & iOS application development.</p>
+      <p>PWA, Android and iOS applications built with scalable architecture.</p>
     </div>
 
     <div class="card">
@@ -303,7 +321,7 @@ a{
     <div class="card">
       <i data-lucide="pen-tool"></i>
       <h3>UI/UX Design</h3>
-      <p>Thoughtful and user-centered interface design systems.</p>
+      <p>Minimal, thoughtful and user-centered interface design systems.</p>
     </div>
   </div>
 </section>
@@ -333,7 +351,7 @@ function toggleTheme(){
   setTimeout(()=>lucide.createIcons(),100);
 }
 
-/* scroll reveal (Apple-style controlled motion) */
+/* scroll reveal */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting) e.target.classList.add("show");
