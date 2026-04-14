@@ -9,280 +9,300 @@
 
 <style>
 /* =========================
-   DESIGN SYSTEM (WARM APPLE STYLE)
+ROOT THEME (UPDATED WARM GRADIENT SYSTEM)
 ========================= */
-:root{
-  --bg:#ffffff;
-  --panel:rgba(255,255,255,0.72);
-  --text:#0a0a0a;
-  --muted:#6b7280;
-  --border:rgba(0,0,0,0.08);
-
-  /* 🌈 Warm premium accents */
-  --accent:#ff5c7a;
-  --accent2:#ffb86b;
-  --accent3:#7c83ff;
-
-  --gradient: linear-gradient(135deg, #ff5c7a, #ffb86b, #7c83ff);
+:root {
+  --bg1: #0f172a;
+  --bg2: #1e1b4b;
+  --card: rgba(255,255,255,0.08);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent1: #6366f1;
+  --accent2: #ec4899;
 }
 
-body.dark{
-  --bg:#0b0f17;
-  --panel:rgba(255,255,255,0.04);
-  --text:#f5f5f7;
-  --muted:#9aa0a6;
-  --border:rgba(255,255,255,0.08);
-
-  --gradient: linear-gradient(135deg, #ff5c7a, #ffb86b, #7c83ff);
-}
-
-*{box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
+body.light {
+  --bg1: #f8fafc;
+  --bg2: #eef2ff;
+  --card: rgba(255,255,255,0.6);
+  --text: #0f172a;
+  --muted: #475569;
 }
 
 /* =========================
-   BACKGROUND GLOW (WARM GRADIENT FIELD)
+GLOBAL
 ========================= */
-.bg{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
+* { box-sizing: border-box; }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text);
+
+  /* 🌈 upgraded cinematic gradient background */
   background:
-    radial-gradient(circle at 15% 20%, rgba(255,92,122,0.18), transparent 45%),
-    radial-gradient(circle at 85% 30%, rgba(255,184,107,0.16), transparent 50%),
-    radial-gradient(circle at 50% 90%, rgba(124,131,255,0.14), transparent 55%),
-    linear-gradient(180deg, #ffffff, #f8fafc);
+    radial-gradient(circle at 20% 20%, #6366f1 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #ec4899 0%, transparent 40%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
+
+  overflow-x: hidden;
+  transition: 0.4s ease;
 }
 
 /* =========================
-   NAV (APPLE GLASS BAR)
+SOFT FLOATING GLOW LAYERS (added but subtle)
 ========================= */
-nav{
-  position:sticky;
-  top:0;
-  z-index:10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 28px;
-
-  background:rgba(255,255,255,0.75);
-  backdrop-filter:saturate(180%) blur(18px);
-  border-bottom:1px solid var(--border);
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  z-index: 0;
 }
 
-body.dark nav{
-  background:rgba(10,15,23,0.6);
+body::before {
+  background: #6366f1;
+  top: -120px;
+  left: -120px;
 }
 
-nav h1{
-  font-size:30px;
-  font-weight:500;
-  margin:0;
-}
-
-.nav-right{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
-input{
-  padding:8px 12px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  outline:none;
-  background:transparent;
-  color:var(--text);
-}
-
-/* toggle button */
-button{
-  border:1px solid var(--border);
-  background:transparent;
-  padding:8px;
-  border-radius:10px;
-  cursor:pointer;
+body::after {
+  background: #ec4899;
+  bottom: -120px;
+  right: -120px;
 }
 
 /* =========================
-   HERO
+NAV (GLASS STYLE)
 ========================= */
-.hero{
-  max-width:900px;
-  margin:auto;
-  padding:140px 24px 80px;
-  text-align:center;
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.hero h2{
-  font-size:56px;
-  font-weight:600;
-  letter-spacing:-1.2px;
-  margin:0;
+body.light nav {
+  background: rgba(255,255,255,0.7);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-.hero p{
-  margin-top:14px;
-  font-size:20px;
-  color:var(--muted);
-  line-height:1.4;
+nav h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.nav-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+input {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 220px;
+
+  background: var(--card);
+  color: var(--text);
+  backdrop-filter: blur(10px);
 }
 
 /* =========================
-   SECTION SYSTEM
+BUTTON (gradient accent system)
 ========================= */
-section{
-  max-width:1100px;
-  margin:auto;
-  padding:80px 24px;
-  opacity:0;
-  transform:translateY(24px);
-  transition:0.9s cubic-bezier(0.2,0.8,0.2,1);
+button {
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
+  transition: 0.2s;
 }
 
-section.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.label{
-  font-size:12px;
-  letter-spacing:0.12em;
-  color:var(--muted);
-  margin-bottom:18px;
-  text-transform:uppercase;
+button:hover {
+  transform: translateY(-2px);
 }
 
 /* =========================
-   SERVICES
+HERO
 ========================= */
-.grid-3{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:16px;
+.hero {
+  max-width: 900px;
+  margin: auto;
+  padding: 140px 24px 80px;
+  text-align: center;
 }
 
-.card{
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px;
-  background:var(--panel);
-  backdrop-filter:saturate(180%) blur(10px);
+.hero h2 {
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  margin: 0;
 }
 
-.card h3{
-  margin:10px 0 6px;
-  font-size:16px;
-}
-
-.card p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.4;
+.hero p {
+  margin-top: 14px;
+  font-size: 20px;
+  color: var(--muted);
+  line-height: 1.4;
 }
 
 /* =========================
-   PROJECTS
+SECTION SYSTEM
 ========================= */
-.projects{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:18px;
+section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 80px 24px;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: 0.9s cubic-bezier(0.2,0.8,0.2,1);
+  position: relative;
+  z-index: 2;
 }
 
-.project{
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  background:var(--panel);
-  transition:0.25s ease;
+section.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.project:hover{
-  transform:translateY(-4px);
-  box-shadow:0 20px 50px rgba(255,92,122,0.08);
-}
-
-.project img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-}
-
-.project-content{
-  padding:14px;
-}
-
-.project h4{
-  margin:0;
-  font-size:15px;
-  font-weight:600;
-}
-
-.project p{
-  font-size:13px;
-  color:var(--muted);
-  margin-top:6px;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-.btn{
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:8px;
-  border:1px solid var(--border);
-}
-
-.primary{
-  background:var(--gradient);
-  color:white;
-  border:none;
-  box-shadow:0 8px 20px rgba(255,92,122,0.18);
+.label {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 18px;
+  text-transform: uppercase;
 }
 
 /* =========================
-   CONTACT
+SERVICES (unchanged structure)
 ========================= */
-.contact{
-  text-align:center;
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 16px;
 }
 
-.email{
-  font-size:18px;
-  font-weight:600;
-  background:var(--gradient);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.card {
+  border-radius: 16px;
+  padding: 18px;
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =========================
+PROJECTS GRID (FIXED TO MATCH NEW THEME)
+========================= */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  gap: 18px;
+}
+
+.project {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition: 0.4s ease;
+}
+
+.project:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.project img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  transition: 0.4s ease;
+}
+
+.project:hover img {
+  transform: scale(1.05);
+}
+
+.project-content {
+  padding: 14px;
+}
+
+.project h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.project p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.primary {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
+  border: none;
+}
+
+/* =========================
+CONTACT
+========================= */
+.contact {
+  text-align: center;
+}
+
+.email {
+  font-size: 18px;
+  color: var(--accent2);
+  font-weight: 500;
 }
 </style>
 </head>
 
 <body>
-
-<div class="bg"></div>
 
 <nav>
   <h1>Angela Guilherme</h1>
@@ -298,7 +318,7 @@ a{
 <!-- HERO -->
 <div class="hero">
   <h2>Full Stack Web Developer</h2>
-  <p>Designing and building refined, high-performance digital products with clarity, structure, and warm modern aesthetics.</p>
+  <p>Designing and building refined, high-performance digital products with a focus on clarity, structure, and user experience.</p>
 </div>
 
 <!-- SERVICES -->
@@ -309,7 +329,7 @@ a{
     <div class="card">
       <i data-lucide="smartphone"></i>
       <h3>App Development</h3>
-      <p>PWA, Android and iOS applications built with scalable architecture.</p>
+      <p>PWA, Android and iOS applications development.</p>
     </div>
 
     <div class="card">
@@ -345,9 +365,9 @@ const username="angelaguilherme-Lo";
 
 lucide.createIcons();
 
-/* theme */
+/* theme toggle */
 function toggleTheme(){
-  document.body.classList.toggle("dark");
+  document.body.classList.toggle("light");
   setTimeout(()=>lucide.createIcons(),100);
 }
 
