@@ -63,8 +63,8 @@ README.md    # Documentation
 This portfolio includes:
 
 * A cookie-clicker game
-* A personal libray
-* A event booking website
+* A personal library
+* An event booking website
 * A personal finance guidance site
 * A private organisation management app
   
