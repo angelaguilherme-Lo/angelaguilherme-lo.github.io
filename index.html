@@ -5,28 +5,26 @@
 <title>Angela Guilherme | Full Stack Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Lucide -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 /* =========================
-   ROOT
+   DESIGN SYSTEM (APPLE STYLE)
 ========================= */
 :root{
-  --bg:#f8fafc;
-  --panel:rgba(255,255,255,0.6);
-  --text:#0f172a;
-  --muted:#64748b;
-  --border:rgba(15,23,42,0.08);
-  --accent:#6366f1;
-  --accent2:#ec4899;
+  --bg:#ffffff;
+  --panel:rgba(255,255,255,0.7);
+  --text:#0a0a0a;
+  --muted:#6b7280;
+  --border:rgba(0,0,0,0.08);
+  --accent:#0071e3; /* Apple-like blue */
 }
 
 body.dark{
-  --bg:#070a12;
-  --panel:rgba(15,23,42,0.55);
-  --text:#e2e8f0;
-  --muted:#94a3b8;
+  --bg:#0b0f17;
+  --panel:rgba(255,255,255,0.04);
+  --text:#f5f5f7;
+  --muted:#9aa0a6;
   --border:rgba(255,255,255,0.08);
 }
 
@@ -38,29 +36,25 @@ html{
 
 body{
   margin:0;
-  font-family:system-ui,-apple-system,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
 }
 
-/* =========================
-   BACKGROUND GLOW (glass vibe)
-========================= */
-.blob{
+/* soft background (VERY subtle) */
+.bg{
   position:fixed;
-  width:500px;
-  height:500px;
-  filter:blur(140px);
-  opacity:.25;
+  inset:0;
+  pointer-events:none;
   z-index:0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0,113,227,0.08), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,45,85,0.06), transparent 45%);
 }
 
-.blob.one{background:#6366f1;top:-120px;left:-120px}
-.blob.two{background:#ec4899;bottom:-160px;right:-120px}
-
 /* =========================
-   NAV (FRAMER STYLE GLASS)
+   NAV (Apple clean bar)
 ========================= */
 nav{
   position:sticky;
@@ -70,19 +64,22 @@ nav{
   justify-content:space-between;
   align-items:center;
   padding:14px 28px;
-
-  background:var(--panel);
-  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,0.6);
+  backdrop-filter:saturate(180%) blur(18px);
   border-bottom:1px solid var(--border);
+}
+
+body.dark nav{
+  background:rgba(10,15,23,0.6);
 }
 
 nav h1{
   font-size:30px;
-  font-weight:600;
+  font-weight:500;
   margin:0;
 }
 
-.nav-actions{
+.nav-right{
   display:flex;
   gap:10px;
   align-items:center;
@@ -92,43 +89,54 @@ input{
   padding:8px 12px;
   border-radius:10px;
   border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--text);
   outline:none;
+  background:transparent;
+  color:var(--text);
+}
+
+/* toggle button */
+button{
+  border:1px solid var(--border);
+  background:transparent;
+  padding:8px;
+  border-radius:10px;
+  cursor:pointer;
 }
 
 /* =========================
-   HERO (APPLE STYLE)
+   HERO (Apple style minimal)
 ========================= */
 .hero{
-  padding:120px 20px 80px;
   max-width:900px;
   margin:auto;
+  padding:140px 24px 80px;
   text-align:center;
 }
 
 .hero h2{
-  font-size:52px;
+  font-size:56px;
+  font-weight:600;
+  letter-spacing:-1.2px;
   margin:0;
-  letter-spacing:-1px;
 }
 
 .hero p{
+  margin-top:14px;
+  font-size:20px;
   color:var(--muted);
-  font-size:18px;
-  margin-top:12px;
+  line-height:1.4;
 }
 
 /* =========================
-   SECTION SYSTEM (storytelling)
+   SECTION SYSTEM (controlled motion)
 ========================= */
 section{
   max-width:1100px;
   margin:auto;
-  padding:80px 20px;
+  padding:80px 24px;
   opacity:0;
-  transform:translateY(40px);
-  transition:1s cubic-bezier(.2,.8,.2,1);
+  transform:translateY(24px);
+  transition:0.9s cubic-bezier(0.2,0.8,0.2,1);
 }
 
 section.show{
@@ -136,71 +144,66 @@ section.show{
   transform:translateY(0);
 }
 
-.title{
+.label{
   font-size:12px;
-  letter-spacing:2px;
-  text-transform:uppercase;
+  letter-spacing:0.12em;
   color:var(--muted);
-  margin-bottom:20px;
+  margin-bottom:18px;
+  text-transform:uppercase;
 }
 
 /* =========================
-   SERVICES (glass cards)
+   SERVICES (Apple cards)
 ========================= */
-.services{
+.grid-3{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:16px;
 }
 
 .card{
-  background:var(--panel);
   border:1px solid var(--border);
-  backdrop-filter:blur(14px);
   border-radius:16px;
   padding:18px;
-  transition:0.2s ease;
-  transform-style:preserve-3d;
-}
-
-.card:hover{
-  transform:translateY(-6px);
+  background:var(--panel);
+  backdrop-filter:saturate(180%) blur(10px);
 }
 
 .card h3{
   margin:10px 0 6px;
+  font-size:16px;
 }
 
 .card p{
   color:var(--muted);
   font-size:14px;
+  line-height:1.4;
 }
 
 /* =========================
-   PROJECT GRID
+   PROJECTS (Apple clean grid)
 ========================= */
-.grid{
+.projects{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:18px;
 }
 
 .project{
-  background:var(--panel);
   border:1px solid var(--border);
   border-radius:16px;
   overflow:hidden;
+  background:var(--panel);
   transition:0.25s ease;
-  position:relative;
 }
 
 .project:hover{
-  transform:translateY(-8px);
+  transform:translateY(-4px);
 }
 
 .project img{
   width:100%;
-  height:150px;
+  height:160px;
   object-fit:cover;
 }
 
@@ -210,119 +213,118 @@ section.show{
 
 .project h4{
   margin:0;
+  font-size:15px;
+  font-weight:600;
 }
 
 .project p{
-  color:var(--muted);
   font-size:13px;
+  color:var(--muted);
+  margin-top:6px;
 }
 
-/* buttons */
 .actions{
   display:flex;
   gap:8px;
   margin-top:10px;
 }
 
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
 .btn{
   font-size:12px;
   padding:6px 10px;
-  border-radius:10px;
+  border-radius:8px;
   border:1px solid var(--border);
 }
 
 .primary{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  background:var(--accent);
   color:white;
   border:none;
 }
 
 /* =========================
-   MAGNETIC EFFECT (JS controlled)
+   CONTACT
 ========================= */
-.magnetic{
-  transition:transform 0.15s ease;
+.contact{
+  text-align:center;
 }
 
-/* =========================
-   TOGGLE BUTTON
-========================= */
-.toggle{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:none;
-  background:var(--panel);
-  border:1px solid var(--border);
-  padding:8px;
-  border-radius:10px;
-  cursor:pointer;
+.email{
+  font-size:18px;
+  color:var(--accent);
+  font-weight:500;
 }
 </style>
 </head>
 
 <body>
 
-<div class="blob one"></div>
-<div class="blob two"></div>
+<div class="bg"></div>
 
 <nav>
   <h1>Angela Guilherme</h1>
 
-  <div class="nav-actions">
+  <div class="nav-right">
     <input id="search" placeholder="Search projects..." />
-    <button class="toggle" onclick="toggleTheme()">
+    <button onclick="toggleTheme()">
       <i data-lucide="sun"></i>
     </button>
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
   <h2>Full Stack Web Developer</h2>
-  <p>Building smooth, modern and high-performance digital experiences with refined UI systems.</p>
+  <p>Designing and building refined, high-performance digital products with a focus on clarity, structure, and user experience.</p>
 </div>
 
 <!-- SERVICES -->
 <section id="services">
-  <div class="title">Services</div>
+  <div class="label">Services</div>
 
-  <div class="services">
-    <div class="card magnetic">
+  <div class="grid-3">
+    <div class="card">
       <i data-lucide="smartphone"></i>
       <h3>App Development</h3>
       <p>PWA, Android & iOS application development.</p>
     </div>
 
-    <div class="card magnetic">
+    <div class="card">
       <i data-lucide="code-2"></i>
       <h3>Web Development</h3>
-      <p>High-end professional websites & systems.</p>
+      <p>Modern websites built with performance and clean UX principles.</p>
     </div>
 
-    <div class="card magnetic">
+    <div class="card">
       <i data-lucide="pen-tool"></i>
       <h3>UI/UX Design</h3>
-      <p>Clean, modern and user-focused design systems.</p>
+      <p>Thoughtful and user-centered interface design systems.</p>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="title">Projects</div>
-  <div class="grid" id="repos"></div>
+  <div class="label">Projects</div>
+  <div class="projects" id="repos"></div>
 </section>
 
 <!-- CONTACT -->
 <section>
-  <div class="title">Contact</div>
-  <p style="font-size:18px;color:var(--accent)">angela.guilherme@live.com</p>
+  <div class="label">Contact</div>
+  <div class="contact">
+    <div class="email">angela.guilherme@live.com</div>
+  </div>
 </section>
 
 <script>
 const username="angelaguilherme-Lo";
 
-/* icons */
 lucide.createIcons();
 
 /* theme */
@@ -331,39 +333,30 @@ function toggleTheme(){
   setTimeout(()=>lucide.createIcons(),100);
 }
 
-/* smooth scroll reveal */
+/* scroll reveal (Apple-style controlled motion) */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting)e.target.classList.add("show");
+    if(e.isIntersecting) e.target.classList.add("show");
   });
 },{threshold:0.15});
 
 document.querySelectorAll("section").forEach(s=>observer.observe(s));
 
-/* fetch repos */
-let reposData=[];
-
+/* repos */
 fetch(`https://api.github.com/users/${username}/repos`)
 .then(r=>r.json())
 .then(data=>{
-  reposData=data.filter(r=>!r.fork);
-  render(reposData);
-});
+  const container=document.getElementById("repos");
 
-const container=document.getElementById("repos");
-
-function render(data){
-  container.innerHTML="";
-
-  data.forEach(repo=>{
+  data.filter(r=>!r.fork).forEach(repo=>{
     const div=document.createElement("div");
-    div.className="project magnetic";
+    div.className="project";
 
     div.innerHTML=`
       <img src="https://opengraph.githubassets.com/1/${username}/${repo.name}">
       <div class="project-content">
         <h4>${repo.name}</h4>
-        <p>${repo.description||"No description"}</p>
+        <p>${repo.description||"No description available"}</p>
 
         <div class="actions">
           <a class="btn primary" href="${repo.html_url}" target="_blank">GitHub</a>
@@ -374,31 +367,15 @@ function render(data){
 
     container.appendChild(div);
   });
-
-  enableMagnetism();
-}
+});
 
 /* search */
 document.getElementById("search").addEventListener("input",e=>{
   const val=e.target.value.toLowerCase();
-  render(reposData.filter(r=>r.name.toLowerCase().includes(val)));
-});
-
-/* magnetic hover */
-function enableMagnetism(){
-  document.querySelectorAll(".magnetic").forEach(el=>{
-    el.addEventListener("mousemove",e=>{
-      const rect=el.getBoundingClientRect();
-      const x=e.clientX-rect.left-rect.width/2;
-      const y=e.clientY-rect.top-rect.height/2;
-      el.style.transform=`translate(${x*0.08}px,${y*0.08}px)`;
-    });
-
-    el.addEventListener("mouseleave",()=>{
-      el.style.transform="translate(0,0)";
-    });
+  document.querySelectorAll(".project").forEach(p=>{
+    p.style.display=p.innerText.toLowerCase().includes(val) ? "block":"none";
   });
-}
+});
 </script>
 
 </body>
