@@ -2,276 +2,248 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Angela Guilherme- Web Developer Portfolio</title>
+<title>Angela Guilherme | Web Developer Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 /* =========================
-   CINEMATIC BASE
+   ROOT THEME
 ========================= */
-:root{
-  --bg1:#050814;
-  --bg2:#0b1026;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-  --accent1:#6366f1;
-  --accent2:#ec4899;
+:root {
+  --bg1: #0f172a;
+  --bg2: #1e1b4b;
+  --card: rgba(255,255,255,0.08);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent1: #6366f1;
+  --accent2: #ec4899;
 }
 
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,sans-serif;
-  color:var(--text);
-  background: radial-gradient(circle at 20% 20%, #1b2a6b33, transparent 40%),
-              radial-gradient(circle at 80% 70%, #ec489933, transparent 40%),
-              linear-gradient(180deg,var(--bg1),var(--bg2));
-  overflow-x:hidden;
+body.light {
+  --bg1: #f8fafc;
+  --bg2: #eef2ff;
+  --card: rgba(255,255,255,0.6);
+  --text: #0f172a;
+  --muted: #475569;
 }
 
 /* =========================
-   CINEMATIC LIGHT BEAM CURSOR
+   GLOBAL
 ========================= */
-.cursor{
-  position:fixed;
-  width:400px;
-  height:400px;
-  background:radial-gradient(circle,rgba(99,102,241,0.18),transparent 70%);
-  border-radius:50%;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:1;
-  transition:transform 0.08s linear;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at 20% 20%, #6366f1 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, #ec4899 0%, transparent 40%),
+              linear-gradient(135deg, var(--bg1), var(--bg2));
+  overflow-x: hidden;
+  transition: 0.4s ease;
+}
+
+/* cursor glow */
+.cursor {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(99,102,241,0.25), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+/* floating blobs */
+.blob {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  filter: blur(120px);
+  opacity: 0.35;
+  z-index: 0;
+  animation: float 12s infinite ease-in-out;
+}
+
+.blob.one { background: #6366f1; top: -100px; left: -100px; }
+.blob.two { background: #ec4899; bottom: -120px; right: -120px; }
+
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(40px); }
 }
 
 /* =========================
-   PARALLAX LAYERS
+   HEADER / HERO
 ========================= */
-.layer{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
+header {
+  text-align: center;
+  padding: 100px 20px 40px;
+  position: relative;
+  z-index: 2;
 }
 
-.blob{
-  position:absolute;
-  width:500px;
-  height:500px;
-  filter:blur(140px);
-  opacity:.25;
-  animation:float 14s ease-in-out infinite;
+h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.blob.one{background:#6366f1;top:-120px;left:-120px}
-.blob.two{background:#ec4899;bottom:-150px;right:-120px}
+header p {
+  color: var(--muted);
+  font-size: 1.2rem;
+}
 
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(60px)}
+/* controls */
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+input, button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 220px;
+  background: var(--card);
+  color: var(--text);
+  backdrop-filter: blur(10px);
+}
+
+button {
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
 }
 
 /* =========================
-   HERO (CINEMATIC OPENING SHOT)
+   GRID
 ========================= */
-.hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  position:relative;
-  z-index:2;
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
-.hero h1{
-  font-size:4rem;
-  margin:0;
-  background:linear-gradient(90deg,var(--accent1),var(--accent2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  letter-spacing:-1px;
-}
-
-.hero p{
-  color:var(--muted);
-  font-size:1.2rem;
-  max-width:600px;
-}
-
-/* cinematic fade hint */
-.scroll-hint{
-  position:absolute;
-  bottom:40px;
-  color:var(--muted);
-  font-size:.9rem;
-  animation:fade 2s infinite;
-}
-
-@keyframes fade{
-  0%,100%{opacity:.3}
-  50%{opacity:1}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
 }
 
 /* =========================
-   FEATURED PROJECT (TRAILER STYLE)
+   CARD (GLASS PREMIUM)
 ========================= */
-.featured{
-  min-height:80vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:80px 20px;
-  position:relative;
-  z-index:2;
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  transform: translateY(40px);
+  opacity: 0;
+  transition: 0.4s ease;
 }
 
-.featured-card{
-  width:min(1000px,90%);
-  border-radius:20px;
-  overflow:hidden;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(18px);
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  border:1px solid rgba(255,255,255,0.08);
-  transform:translateY(40px);
-  opacity:0;
-  transition:1s ease;
+.card.show {
+  transform: translateY(0);
+  opacity: 1;
 }
 
-.featured-card.show{
-  transform:translateY(0);
-  opacity:1;
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
 }
 
-.featured img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  transition: 0.4s;
 }
 
-.featured-content{
-  padding:30px;
+.card:hover img {
+  transform: scale(1.05);
 }
 
-.featured h2{
-  margin:0;
-  font-size:2rem;
+.card-content {
+  padding: 18px;
 }
 
-.featured p{
-  color:var(--muted);
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
 }
 
-/* =========================
-   PROJECT CINEMA GRID
-========================= */
-.section{
-  padding:80px 20px;
-  position:relative;
-  z-index:2;
-}
-
-.grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:24px;
-}
-
-/* cinematic cards */
-.card{
-  border-radius:16px;
-  overflow:hidden;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,0.08);
-  transform:translateY(40px) scale(.98);
-  opacity:0;
-  transition:0.8s ease;
-}
-
-.card.show{
-  transform:translateY(0) scale(1);
-  opacity:1;
-}
-
-.card:hover{
-  transform:translateY(-10px) scale(1.02);
-}
-
-.card img{
-  width:100%;
-  height:170px;
-  object-fit:cover;
-  transition:0.6s;
-}
-
-.card:hover img{
-  transform:scale(1.08);
-}
-
-.card-content{
-  padding:16px;
-}
-
-.card h3{
-  margin:0;
-}
-
-.card p{
-  color:var(--muted);
-  font-size:.9rem;
-}
-
-a{
-  text-decoration:none;
+.card p {
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 /* buttons */
-.btns{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
 }
 
-.btn{
-  padding:8px 12px;
-  border-radius:10px;
-  font-size:.8rem;
-  transition:.3s;
+a.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: 0.2s;
 }
 
-.primary{
-  background:linear-gradient(135deg,var(--accent1),var(--accent2));
-  color:white;
+a.primary {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
 }
 
-.secondary{
-  background:rgba(255,255,255,0.08);
-  color:var(--text);
+a.secondary {
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
 }
 
-.btn:hover{
-  transform:translateY(-2px);
+a.btn:hover {
+  transform: translateY(-2px);
 }
 
 /* =========================
-   SCENE FADE TRANSITIONS
+   FOOTER
 ========================= */
-.section{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
+footer {
+  text-align: center;
+  padding: 50px;
+  color: var(--muted);
 }
 
-.section.show{
-  opacity:1;
-  transform:translateY(0);
+/* =========================
+   THEME TOGGLE
+========================= */
+.toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
 }
 </style>
 </head>
@@ -279,92 +251,100 @@ a{
 <body>
 
 <div class="cursor"></div>
+<div class="blob one"></div>
+<div class="blob two"></div>
 
-<div class="layer">
-  <div class="blob one"></div>
-  <div class="blob two"></div>
-</div>
+<button class="toggle" onclick="toggleTheme()">🌙</button>
 
-<!-- HERO SCENE -->
-<div class="hero">
+<header>
   <h1>Angela Guilherme</h1>
-  <p>A cinematic developer portfolio experience — where code meets storytelling</p>
-  <div class="scroll-hint">Scroll to begin ↓</div>
-</div>
+  <p>Ultra Premium Developer Portfolio</p>
 
-<!-- FEATURED SCENE -->
-<div class="featured">
-  <div class="featured-card" id="featured">
-    <img src="https://opengraph.githubassets.com/1/octocat/Hello-World">
-    <div class="featured-content">
-      <h2>Featured Project</h2>
-      <p>This is your main cinematic highlight project. It behaves like a trailer card — slow reveal, emotional focus, premium spacing.</p>
-    </div>
+  <div class="controls">
+    <input id="search" placeholder="Search projects..." />
   </div>
-</div>
+</header>
 
-<!-- PROJECT GRID SCENE -->
-<div class="section">
+<div class="container">
   <div class="grid" id="repos"></div>
 </div>
 
-<script>
-const username="angelaguilherme-Lo";
+<footer>© 2026 Angela Guilherme — Crafted with precision. </footer>
 
-/* CURSOR LIGHT */
-document.addEventListener("mousemove",e=>{
-  const c=document.querySelector(".cursor");
-  c.style.left=e.clientX+"px";
-  c.style.top=e.clientY+"px";
+<script>
+const username = "angelaguilherme-Lo";
+const container = document.getElementById("repos");
+let reposData = [];
+
+/* cursor glow */
+document.addEventListener("mousemove", e => {
+  const cursor = document.querySelector(".cursor");
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
 });
 
-/* FETCH */
+/* theme toggle */
+function toggleTheme() {
+  document.body.classList.toggle("light");
+}
+
+/* fetch repos */
 fetch(`https://api.github.com/users/${username}/repos`)
-.then(r=>r.json())
-.then(data=>{
-  const container=document.getElementById("repos");
+.then(r => r.json())
+.then(data => {
+  reposData = data.filter(r => !r.fork);
+  render(reposData);
+});
 
-  data.filter(r=>!r.fork).forEach((repo,i)=>{
-    const card=document.createElement("div");
-    card.className="card";
+/* render */
+function render(data) {
+  container.innerHTML = "";
 
-    card.innerHTML=`
+  data.forEach((repo, i) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
       <img src="https://opengraph.githubassets.com/1/${username}/${repo.name}">
       <div class="card-content">
         <h3>${repo.name}</h3>
-        <p>${repo.description||"No description"}</p>
-        <div class="btns">
+        <p>${repo.description || "No description available"}</p>
+
+        <div class="actions">
           <a class="btn primary" href="${repo.html_url}" target="_blank">GitHub</a>
-          ${repo.homepage?`<a class="btn secondary" href="${repo.homepage}" target="_blank">Live</a>`:""}
+          ${repo.homepage ? `<a class="btn secondary" href="${repo.homepage}" target="_blank">Live</a>` : ""}
         </div>
       </div>
     `;
 
     container.appendChild(card);
+
+    setTimeout(() => card.classList.add("show"), i * 60);
   });
 
   observe();
-});
-
-/* SCENE REVEAL */
-function observe(){
-  const items=document.querySelectorAll(".card, .section, .featured-card");
-
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add("show");
-      }
-    });
-  },{threshold:0.15});
-
-  items.forEach(i=>io.observe(i));
 }
 
-/* FEATURED reveal delay */
-setTimeout(()=>{
-  document.getElementById("featured").classList.add("show");
-},500);
+/* scroll reveal */
+function observe() {
+  const cards = document.querySelectorAll(".card");
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add("show");
+    });
+  });
+
+  cards.forEach(c => io.observe(c));
+}
+
+/* search filter */
+document.getElementById("search").addEventListener("input", e => {
+  const val = e.target.value.toLowerCase();
+  const filtered = reposData.filter(r =>
+    r.name.toLowerCase().includes(val)
+  );
+  render(filtered);
+});
 </script>
 
 </body>
