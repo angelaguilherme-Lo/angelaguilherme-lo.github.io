@@ -92,6 +92,19 @@ Improvement and add-ons in the future:
 
 [angela.guilherme@live.com](mailto:angela.guilherme@live.com)
 
+
+## General Tech Stack skills
+
+- React/ Vite
+- Node.js
+- Express
+- REST APIs
+- Next.js
+- Vercel
+- SQL
+- Supabase
+- HTML, CSS, JAVASCRIPT 
+
 ---
 
 ## <i data-lucide="file-text"></i> License
