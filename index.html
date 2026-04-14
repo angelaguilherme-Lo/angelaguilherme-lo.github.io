@@ -5,16 +5,16 @@
 <title>Angela Guilherme | Full Stack Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Lucide Icons -->
+<!-- Lucide -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 /* =========================
-   ROOT THEME (FRAMER STYLE LIGHT FIRST)
+   ROOT
 ========================= */
 :root{
   --bg:#f8fafc;
-  --panel:#ffffff;
+  --panel:rgba(255,255,255,0.6);
   --text:#0f172a;
   --muted:#64748b;
   --border:rgba(15,23,42,0.08);
@@ -23,8 +23,8 @@
 }
 
 body.dark{
-  --bg:#0b1020;
-  --panel:#0f172a;
+  --bg:#070a12;
+  --panel:rgba(15,23,42,0.55);
   --text:#e2e8f0;
   --muted:#94a3b8;
   --border:rgba(255,255,255,0.08);
@@ -32,163 +32,175 @@ body.dark{
 
 *{box-sizing:border-box}
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   font-family:system-ui,-apple-system,sans-serif;
   background:var(--bg);
   color:var(--text);
-  transition:0.4s ease;
   overflow-x:hidden;
 }
 
-/* soft background blobs (very subtle like Framer) */
+/* =========================
+   BACKGROUND GLOW (glass vibe)
+========================= */
 .blob{
   position:fixed;
   width:500px;
   height:500px;
   filter:blur(140px);
-  opacity:0.25;
+  opacity:.25;
   z-index:0;
 }
 
-.blob.one{background:#6366f1;top:-150px;left:-120px;}
-.blob.two{background:#ec4899;bottom:-200px;right:-120px;}
+.blob.one{background:#6366f1;top:-120px;left:-120px}
+.blob.two{background:#ec4899;bottom:-160px;right:-120px}
 
 /* =========================
-   NAV
+   NAV (FRAMER STYLE GLASS)
 ========================= */
 nav{
+  position:sticky;
+  top:0;
+  z-index:10;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 40px;
-  position:sticky;
-  top:0;
-  backdrop-filter:blur(10px);
-  background:color-mix(in srgb, var(--bg) 80%, transparent);
+  padding:14px 28px;
+
+  background:var(--panel);
+  backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
-  z-index:10;
 }
 
 nav h1{
-  font-size:16px;
-  margin:0;
+  font-size:14px;
   font-weight:600;
+  margin:0;
 }
 
-nav button{
-  border:none;
-  background:var(--panel);
+.nav-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+input{
   padding:8px 12px;
   border-radius:10px;
-  cursor:pointer;
   border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  outline:none;
 }
 
 /* =========================
-   HERO (FRAMER STYLE)
+   HERO (APPLE STYLE)
 ========================= */
 .hero{
-  padding:120px 40px 60px;
-  max-width:1100px;
+  padding:120px 20px 80px;
+  max-width:900px;
   margin:auto;
-  position:relative;
-  z-index:2;
+  text-align:center;
 }
 
 .hero h2{
-  font-size:56px;
-  line-height:1.1;
+  font-size:52px;
   margin:0;
+  letter-spacing:-1px;
 }
 
 .hero p{
   color:var(--muted);
   font-size:18px;
-  margin-top:15px;
-  max-width:600px;
+  margin-top:12px;
 }
 
 /* =========================
-   SECTION WRAPPER
+   SECTION SYSTEM (storytelling)
 ========================= */
 section{
   max-width:1100px;
   margin:auto;
-  padding:60px 40px;
-  position:relative;
-  z-index:2;
+  padding:80px 20px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s cubic-bezier(.2,.8,.2,1);
 }
 
-.section-title{
-  font-size:14px;
-  letter-spacing:1px;
-  color:var(--muted);
+section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.title{
+  font-size:12px;
+  letter-spacing:2px;
   text-transform:uppercase;
+  color:var(--muted);
   margin-bottom:20px;
 }
 
 /* =========================
-   SERVICES (FRAMER STYLE CARDS)
+   SERVICES (glass cards)
 ========================= */
 .services{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+  gap:16px;
 }
 
-.service-card{
+.card{
   background:var(--panel);
   border:1px solid var(--border);
+  backdrop-filter:blur(14px);
   border-radius:16px;
-  padding:20px;
-  transition:0.3s ease;
+  padding:18px;
+  transition:0.2s ease;
+  transform-style:preserve-3d;
 }
 
-.service-card:hover{
+.card:hover{
   transform:translateY(-6px);
 }
 
-.service-card i{
-  width:22px;
-  height:22px;
-  color:var(--accent);
+.card h3{
+  margin:10px 0 6px;
 }
 
-.service-card h3{
-  margin:10px 0 8px;
-  font-size:16px;
-}
-
-.service-card p{
+.card p{
   color:var(--muted);
   font-size:14px;
 }
 
 /* =========================
-   PROJECTS (FRAMER-STYLE ALIGNMENT GRID)
+   PROJECT GRID
 ========================= */
-.projects{
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:20px;
+  gap:16px;
 }
 
 .project{
   background:var(--panel);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:16px;
   overflow:hidden;
-  transition:0.3s ease;
+  transition:0.25s ease;
+  position:relative;
 }
 
 .project:hover{
-  transform:translateY(-6px);
+  transform:translateY(-8px);
 }
 
 .project img{
   width:100%;
-  height:160px;
+  height:150px;
   object-fit:cover;
 }
 
@@ -198,17 +210,11 @@ section{
 
 .project h4{
   margin:0;
-  font-size:15px;
 }
 
 .project p{
-  font-size:13px;
   color:var(--muted);
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
+  font-size:13px;
 }
 
 /* buttons */
@@ -221,7 +227,7 @@ a{
 .btn{
   font-size:12px;
   padding:6px 10px;
-  border-radius:8px;
+  border-radius:10px;
   border:1px solid var(--border);
 }
 
@@ -232,29 +238,25 @@ a{
 }
 
 /* =========================
-   CONTACT
+   MAGNETIC EFFECT (JS controlled)
 ========================= */
-.contact{
-  text-align:left;
-}
-
-.email{
-  font-size:18px;
-  font-weight:500;
-  color:var(--accent);
+.magnetic{
+  transition:transform 0.15s ease;
 }
 
 /* =========================
-   ANIMATION
+   TOGGLE BUTTON
 ========================= */
-.fade{
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeUp 0.6s forwards;
-}
-
-@keyframes fadeUp{
-  to{opacity:1; transform:translateY(0);}
+.toggle{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:none;
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:8px;
+  border-radius:10px;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -264,77 +266,98 @@ a{
 <div class="blob one"></div>
 <div class="blob two"></div>
 
-<!-- NAV -->
 <nav>
   <h1>Angela Guilherme</h1>
-  <button onclick="toggleTheme()">Toggle</button>
+
+  <div class="nav-actions">
+    <input id="search" placeholder="Search projects..." />
+    <button class="toggle" onclick="toggleTheme()">
+      <i data-lucide="sun"></i>
+    </button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero fade">
+<div class="hero">
   <h2>Full Stack Web Developer</h2>
-  <p>Building modern, scalable and beautifully crafted web experiences with clean architecture and UI systems.</p>
+  <p>Building smooth, modern and high-performance digital experiences with refined UI systems.</p>
 </div>
 
 <!-- SERVICES -->
-<section>
-  <div class="section-title">Services</div>
+<section id="services">
+  <div class="title">Services</div>
 
   <div class="services">
-
-    <div class="service-card fade">
+    <div class="card magnetic">
       <i data-lucide="smartphone"></i>
       <h3>App Development</h3>
-      <p>Development of applications for PWA, Android and iOS.</p>
+      <p>PWA, Android & iOS application development.</p>
     </div>
 
-    <div class="service-card fade">
+    <div class="card magnetic">
       <i data-lucide="code-2"></i>
       <h3>Web Development</h3>
-      <p>High-quality professional websites with modern stacks.</p>
+      <p>High-end professional websites & systems.</p>
     </div>
 
-    <div class="service-card fade">
+    <div class="card magnetic">
       <i data-lucide="pen-tool"></i>
       <h3>UI/UX Design</h3>
-      <p>Clean and thoughtful design systems focused on usability.</p>
+      <p>Clean, modern and user-focused design systems.</p>
     </div>
-
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section>
-  <div class="section-title">Projects</div>
-  <div class="projects" id="repos"></div>
+<section id="projects">
+  <div class="title">Projects</div>
+  <div class="grid" id="repos"></div>
 </section>
 
 <!-- CONTACT -->
-<section class="contact">
-  <div class="section-title">Contact</div>
-  <p class="email">angela.guilherme@live.com</p>
+<section>
+  <div class="title">Contact</div>
+  <p style="font-size:18px;color:var(--accent)">angela.guilherme@live.com</p>
 </section>
 
 <script>
 const username="angelaguilherme-Lo";
 
+/* icons */
+lucide.createIcons();
+
 /* theme */
 function toggleTheme(){
   document.body.classList.toggle("dark");
+  setTimeout(()=>lucide.createIcons(),100);
 }
 
-/* lucide icons */
-lucide.createIcons();
+/* smooth scroll reveal */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add("show");
+  });
+},{threshold:0.15});
 
-/* repos */
+document.querySelectorAll("section").forEach(s=>observer.observe(s));
+
+/* fetch repos */
+let reposData=[];
+
 fetch(`https://api.github.com/users/${username}/repos`)
 .then(r=>r.json())
 .then(data=>{
-  const container=document.getElementById("repos");
+  reposData=data.filter(r=>!r.fork);
+  render(reposData);
+});
 
-  data.filter(r=>!r.fork).forEach(repo=>{
+const container=document.getElementById("repos");
+
+function render(data){
+  container.innerHTML="";
+
+  data.forEach(repo=>{
     const div=document.createElement("div");
-    div.className="project fade";
+    div.className="project magnetic";
 
     div.innerHTML=`
       <img src="https://opengraph.githubassets.com/1/${username}/${repo.name}">
@@ -351,7 +374,31 @@ fetch(`https://api.github.com/users/${username}/repos`)
 
     container.appendChild(div);
   });
+
+  enableMagnetism();
+}
+
+/* search */
+document.getElementById("search").addEventListener("input",e=>{
+  const val=e.target.value.toLowerCase();
+  render(reposData.filter(r=>r.name.toLowerCase().includes(val)));
 });
+
+/* magnetic hover */
+function enableMagnetism(){
+  document.querySelectorAll(".magnetic").forEach(el=>{
+    el.addEventListener("mousemove",e=>{
+      const rect=el.getBoundingClientRect();
+      const x=e.clientX-rect.left-rect.width/2;
+      const y=e.clientY-rect.top-rect.height/2;
+      el.style.transform=`translate(${x*0.08}px,${y*0.08}px)`;
+    });
+
+    el.addEventListener("mouseleave",()=>{
+      el.style.transform="translate(0,0)";
+    });
+  });
+}
 </script>
 
 </body>
