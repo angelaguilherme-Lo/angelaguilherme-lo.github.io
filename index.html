@@ -9,57 +9,58 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(to bottom, #f8fafc, #eef2ff);
-      color: #1e293b;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      color: #0f172a;
     }
 
     header {
-      padding: 60px 20px 40px;
+      padding: 80px 20px 40px;
       text-align: center;
     }
 
     h1 {
+      font-size: 3rem;
       margin: 0;
-      font-size: 2.8rem;
-      font-weight: 700;
+      letter-spacing: -1px;
     }
 
     header p {
-      margin-top: 10px;
-      font-size: 1.1rem;
+      margin-top: 12px;
+      font-size: 1.2rem;
       color: #64748b;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1300px;
       margin: auto;
-      padding: 20px 40px 60px;
+      padding: 20px 40px 80px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
     }
 
     .card {
-      background: white;
-      border-radius: 18px;
+      position: relative;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 10px; /* reduced rounding */
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
       transition: all 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
     }
 
     .card img {
       width: 100%;
-      height: 160px;
+      height: 180px;
       object-fit: cover;
-      background: #e2e8f0;
     }
 
     .card-content {
@@ -68,54 +69,75 @@
 
     .card h3 {
       margin: 0 0 10px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      line-height: 1.4;
+      word-break: break-word; /* ensures long names wrap */
     }
 
     .card p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #475569;
-      min-height: 40px;
+      margin-bottom: 15px;
+      line-height: 1.5;
     }
 
     .buttons {
-      margin-top: 15px;
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .btn {
       text-decoration: none;
       font-size: 0.85rem;
-      padding: 6px 12px;
-      border-radius: 8px;
+      padding: 7px 14px;
+      border-radius: 6px;
       font-weight: 500;
       transition: 0.2s;
     }
 
     .btn-primary {
-      background: #3b82f6;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
       color: white;
     }
 
     .btn-primary:hover {
-      background: #2563eb;
+      opacity: 0.9;
     }
 
     .btn-secondary {
-      background: #e2e8f0;
+      background: rgba(226, 232, 240, 0.7); /* reduced opacity */
       color: #1e293b;
     }
 
     .btn-secondary:hover {
-      background: #cbd5f5;
+      background: rgba(203, 213, 225, 0.9);
     }
 
     footer {
       text-align: center;
-      padding: 30px;
+      padding: 40px;
       color: #94a3b8;
       font-size: 0.9rem;
     }
+
+    /* subtle animation */
+    .card {
+      animation: fadeUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
   </style>
 </head>
 
@@ -123,7 +145,7 @@
 
 <header>
   <h1>Angela Guilherme</h1>
-  <p>My GitHub Projects Portfolio</p>
+  <p>Creative Developer Portfolio</p>
 </header>
 
 <div class="container">
@@ -131,7 +153,7 @@
 </div>
 
 <footer>
-  © 2026 Angela Guilherme • Built with GitHub Pages
+  © 2026 Angela Guilherme • Portfolio
 </footer>
 
 <script>
@@ -143,18 +165,17 @@
 
       const container = document.getElementById("repos");
 
-      // Sort newest first
       data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-      data.forEach(repo => {
+      data.forEach((repo, index) => {
 
         if (repo.fork) return;
 
-        // Auto-generated "preview image" (no upload needed)
         const image = `https://opengraph.githubassets.com/1/${username}/${repo.name}`;
 
         const card = document.createElement("div");
         card.className = "card";
+        card.style.animationDelay = `${index * 0.05}s`;
 
         card.innerHTML = `
           <img src="${image}" alt="${repo.name}">
