@@ -13,18 +13,21 @@
 
   <style>
     :root {
-      --bg: #f7f5ef;
-      --surface: #ffffff;
-      --surface-muted: #efede5;
+      /* Main background */
+      --bg: #F8F2E8;
+      --surface: #fffaf3;
+      --surface-muted: #f0e7d9;
 
-      /* Marine Navy replaces black foreground text */
+      /* Main foreground: Marine Navy */
       --text: #101E4A;
+      --muted: #4d5a82;
+      --line: #d8cbb9;
 
-      --muted: #5c6480;
-      --line: #d9dce8;
+      --navy: #101E4A;
       --accent: #d94d2f;
       --accent-dark: #b93e25;
-      --shadow: 0 18px 55px rgba(16, 30, 74, 0.10);
+
+      --shadow: 0 18px 55px rgba(16, 30, 74, 0.12);
       --radius: 18px;
     }
 
@@ -32,9 +35,10 @@
       --bg: #101E4A;
       --surface: #17275a;
       --surface-muted: #21366f;
-      --text: #f7f5ef;
-      --muted: #c6cce0;
-      --line: #3d4f83;
+      --text: #f8f2e8;
+      --muted: #d8cfbf;
+      --line: #52628f;
+      --navy: #f8f2e8;
       --accent: #ff7756;
       --accent-dark: #ff987f;
       --shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
@@ -50,7 +54,7 @@
 
     body {
       margin: 0;
-      min-width: 200px;
+      min-width: 320px;
       background: var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -64,7 +68,8 @@
     }
 
     button,
-    input {
+    input,
+    select {
       font: inherit;
     }
 
@@ -118,14 +123,52 @@
       color: var(--text);
     }
 
+    /* Language selector */
+    .language-switcher {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .language-switcher i {
+      width: 17px;
+      height: 17px;
+      color: var(--accent);
+      pointer-events: none;
+    }
+
+    #language-select {
+      appearance: none;
+      min-width: 105px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    #language-select option {
+      background: var(--surface);
+      color: var(--text);
+    }
+
     .icon-button {
       display: inline-grid;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       place-items: center;
       border: 1px solid var(--line);
       border-radius: 50%;
-      background: transparent;
+      background: var(--surface);
       color: var(--text);
       transition: transform 0.2s ease, background 0.2s ease;
     }
@@ -171,10 +214,10 @@
     h1 {
       max-width: 900px;
       margin: 0;
-      font-size: clamp(3.4rem, 9vw, 8rem);
+      font-size: clamp(3rem, 6.5vw, 5.8rem);
       font-weight: 800;
-      line-height: 0.92;
-      letter-spacing: -0.085em;
+      line-height: 0.98;
+      letter-spacing: -0.07em;
     }
 
     h1 .accent-text {
@@ -183,9 +226,9 @@
 
     .hero-description {
       max-width: 680px;
-      margin: 34px 0 0;
+      margin: 30px 0 0;
       color: var(--muted);
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
       line-height: 1.6;
     }
 
@@ -193,7 +236,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 36px;
+      margin-top: 34px;
     }
 
     .button {
@@ -214,17 +257,23 @@
       transform: translateY(-3px);
     }
 
+    /* Hero LinkedIn button */
     .button-primary {
-      background: var(--accent);
+      background: #101E4A;
       color: #ffffff;
     }
 
     .button-primary:hover {
-      background: var(--accent-dark);
+      background: #1e3577;
+    }
+
+    body.dark .button-primary {
+      background: #f8f2e8;
+      color: #101E4A;
     }
 
     .button-secondary {
-      border-color: var(--line);
+      border-color: var(--navy);
       background: transparent;
       color: var(--text);
     }
@@ -237,7 +286,7 @@
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      margin-top: 76px;
+      margin-top: 70px;
       color: var(--text);
       font-size: 0.9rem;
       font-weight: 700;
@@ -248,7 +297,7 @@
       width: 40px;
       height: 40px;
       place-items: center;
-      border: 1px solid var(--line);
+      border: 1px solid var(--navy);
       border-radius: 50%;
       animation: float-arrow 1.8s ease-in-out infinite;
     }
@@ -266,7 +315,7 @@
 
     /* General sections */
     section {
-      padding: 112px 0;
+      padding: 96px 0;
       border-top: 1px solid var(--line);
     }
 
@@ -275,14 +324,14 @@
       grid-template-columns: 0.7fr 1.3fr;
       gap: 32px;
       align-items: start;
-      margin-bottom: 42px;
+      margin-bottom: 40px;
     }
 
     .section-heading h2 {
       margin: 0;
-      font-size: clamp(2.2rem, 4vw, 4.5rem);
-      line-height: 0.98;
-      letter-spacing: -0.065em;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
     }
 
     .section-intro {
@@ -471,7 +520,7 @@
       text-align: center;
     }
 
-    /* Where to find me */
+    /* Contact */
     .find-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
@@ -497,9 +546,9 @@
     .contact-card h2 {
       max-width: 600px;
       margin: 0;
-      font-size: clamp(2.2rem, 4.5vw, 4.6rem);
-      line-height: 0.98;
-      letter-spacing: -0.07em;
+      font-size: clamp(2rem, 3.8vw, 3.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
     }
 
     .contact-card p {
@@ -613,9 +662,27 @@
         display: none;
       }
 
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .language-switcher {
+        min-height: 40px;
+        padding: 0 10px;
+      }
+
+      #language-select {
+        min-width: 86px;
+        font-size: 0.8rem;
+      }
+
       .hero {
         min-height: calc(100vh - 66px);
         padding: 58px 0 38px;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 12vw, 4rem);
       }
 
       .work-scroll {
@@ -663,21 +730,20 @@
       </a>
 
       <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#projects">Work</a>
-        <a href="#contact">Contact</a>
+        <a href="#services" data-i18n="navServices">Services</a>
+        <a href="#projects" data-i18n="navWork">Work</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
       </div>
 
       <div class="nav-actions">
-        <a
-          class="icon-button"
-          href="https://www.linkedin.com/in/angela-guilherme-067b96262/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Visit Angela's LinkedIn profile"
-        >
-          <i data-lucide="linkedin"></i>
-        </a>
+        <label class="language-switcher" for="language-select">
+          <i data-lucide="languages"></i>
+          <select id="language-select" aria-label="Select website language">
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+            <option value="no">Norsk</option>
+          </select>
+        </label>
 
         <button class="icon-button" onclick="toggleTheme()" aria-label="Toggle theme">
           <i data-lucide="moon"></i>
@@ -690,14 +756,14 @@
     <!-- HERO -->
     <section class="hero" style="border-top: 0">
       <div class="container hero-content">
-        <div class="eyebrow">Full Stack Web Developer</div>
+        <div class="eyebrow" data-i18n="heroEyebrow">Full Stack Web Developer</div>
 
         <h1>
-          Building thoughtful<br />
-          digital <span class="accent-text">experiences.</span>
+          <span data-i18n="heroTitleStart">Building thoughtful</span><br />
+          <span class="accent-text" data-i18n="heroTitleAccent">digital experiences.</span>
         </h1>
 
-        <p class="hero-description">
+        <p class="hero-description" data-i18n="heroDescription">
           I design and build refined websites and applications that balance
           performance, clarity, structure, and human-centered user experiences.
         </p>
@@ -710,7 +776,7 @@
             rel="noopener noreferrer"
           >
             <i data-lucide="linkedin"></i>
-            LinkedIn
+            <span data-i18n="linkedinButton">LinkedIn</span>
             <i data-lucide="arrow-up-right"></i>
           </a>
 
@@ -720,13 +786,13 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Get in touch
+            <span data-i18n="getInTouch">Get in touch</span>
             <i data-lucide="arrow-up-right"></i>
           </a>
         </div>
 
         <a class="work-scroll" href="#projects">
-          View my work
+          <span data-i18n="viewWork">View my work</span>
           <span class="scroll-icon">
             <i data-lucide="arrow-down"></i>
           </span>
@@ -738,10 +804,11 @@
     <section id="services" class="reveal">
       <div class="container">
         <div class="section-heading">
-          <div class="section-kicker">What I do</div>
+          <div class="section-kicker" data-i18n="servicesKicker">What I do</div>
+
           <div>
-            <h2>From idea to polished product.</h2>
-            <p class="section-intro">
+            <h2 data-i18n="servicesTitle">From idea to polished product.</h2>
+            <p class="section-intro" data-i18n="servicesIntro">
               I combine development and design thinking to create useful,
               scalable, and visually clear digital experiences.
             </p>
@@ -753,24 +820,33 @@
             <div class="service-icon">
               <i data-lucide="smartphone"></i>
             </div>
-            <h3>App Development</h3>
-            <p>PWA, Android, and iOS application development built around real user needs.</p>
+            <h3 data-i18n="serviceAppTitle">App Development</h3>
+            <p data-i18n="serviceAppText">
+              PWA, Android, and iOS application development built around real
+              user needs.
+            </p>
           </article>
 
           <article class="service-card">
             <div class="service-icon">
               <i data-lucide="code-2"></i>
             </div>
-            <h3>Web Development</h3>
-            <p>Modern, responsive websites with clean architecture and performance in mind.</p>
+            <h3 data-i18n="serviceWebTitle">Web Development</h3>
+            <p data-i18n="serviceWebText">
+              Modern, responsive websites with clean architecture and
+              performance in mind.
+            </p>
           </article>
 
           <article class="service-card">
             <div class="service-icon">
               <i data-lucide="pen-tool"></i>
             </div>
-            <h3>UI/UX Design</h3>
-            <p>Thoughtful interfaces and design systems that make digital products easier to use.</p>
+            <h3 data-i18n="serviceDesignTitle">UI/UX Design</h3>
+            <p data-i18n="serviceDesignText">
+              Thoughtful interfaces and design systems that make digital
+              products easier to use.
+            </p>
           </article>
         </div>
       </div>
@@ -780,10 +856,11 @@
     <section id="projects" class="reveal">
       <div class="container">
         <div class="section-heading">
-          <div class="section-kicker">Selected work</div>
+          <div class="section-kicker" data-i18n="projectsKicker">Selected work</div>
+
           <div>
-            <h2>Things I have built.</h2>
-            <p class="section-intro">
+            <h2 data-i18n="projectsTitle">Things I have built.</h2>
+            <p class="section-intro" data-i18n="projectsIntro">
               A selection of projects fetched directly from my GitHub profile.
             </p>
           </div>
@@ -792,12 +869,19 @@
         <div class="projects-toolbar">
           <div class="search-wrap">
             <i data-lucide="search"></i>
-            <input id="search" type="search" placeholder="Search projects..." />
+            <input
+              id="search"
+              type="search"
+              placeholder="Search projects..."
+              data-i18n-placeholder="searchPlaceholder"
+            />
           </div>
         </div>
 
         <div class="projects" id="repos" aria-live="polite">
-          <div class="empty-state">Loading GitHub projects...</div>
+          <div class="empty-state" data-i18n="loadingProjects">
+            Loading GitHub projects...
+          </div>
         </div>
       </div>
     </section>
@@ -807,9 +891,11 @@
       <div class="container">
         <div class="find-grid">
           <div class="contact-card">
-            <div class="section-kicker">Let’s work together</div>
-            <h2>Have a project in mind?</h2>
-            <p>
+            <div class="section-kicker" data-i18n="contactKicker">Let’s work together</div>
+
+            <h2 data-i18n="contactTitle">Have a project in mind?</h2>
+
+            <p data-i18n="contactText">
               I am always open to discussing new ideas, collaborative projects,
               and opportunities to build something useful.
             </p>
@@ -820,15 +906,15 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              Get in touch
+              <span data-i18n="getInTouch">Get in touch</span>
               <i data-lucide="arrow-up-right"></i>
             </a>
           </div>
 
           <aside class="social-card">
             <div>
-              <div class="section-kicker">Where to find me</div>
-              <h3>Let’s connect.</h3>
+              <div class="section-kicker" data-i18n="findMeKicker">Where to find me</div>
+              <h3 data-i18n="findMeTitle">Let’s connect.</h3>
             </div>
 
             <div class="social-list">
@@ -873,13 +959,157 @@
   <footer>
     <div class="container footer-inner">
       <span>© <span id="year"></span> Angela Guilherme</span>
-      <span>Designed and built with care.</span>
+      <span data-i18n="footerText">Designed and built with care. Power by Consultoria Virtual</span>
     </div>
   </footer>
 
   <script>
     const username = "angelaguilherme-Lo";
     const email = "angela.guilherme@live.com";
+    let currentLanguage = "en";
+
+    const translations = {
+      en: {
+        navServices: "Services",
+        navWork: "Work",
+        navContact: "Contact",
+        heroEyebrow: "Full Stack Web Developer",
+        heroTitleStart: "Building thoughtful",
+        heroTitleAccent: "digital experiences.",
+        heroDescription:
+          "I design and build refined websites and applications that balance performance, clarity, structure, and human-centered user experiences.",
+        linkedinButton: "LinkedIn",
+        getInTouch: "Get in touch",
+        viewWork: "View my work",
+        servicesKicker: "What I do",
+        servicesTitle: "From idea to polished product.",
+        servicesIntro:
+          "I combine development and design thinking to create useful, scalable, and visually clear digital experiences.",
+        serviceAppTitle: "App Development",
+        serviceAppText:
+          "PWA, Android, and iOS application development built around real user needs.",
+        serviceWebTitle: "Web Development",
+        serviceWebText:
+          "Modern, responsive websites with clean architecture and performance in mind.",
+        serviceDesignTitle: "UI/UX Design",
+        serviceDesignText:
+          "Thoughtful interfaces and design systems that make digital products easier to use.",
+        projectsKicker: "Selected work",
+        projectsTitle: "Things I have built.",
+        projectsIntro:
+          "A selection of projects fetched directly from my GitHub profile.",
+        searchPlaceholder: "Search projects...",
+        loadingProjects: "Loading GitHub projects...",
+        noProjects: "No public repositories found yet.",
+        loadError:
+          "Unable to load projects right now. Please visit my GitHub profile instead.",
+        projectFallback: "No description available yet.",
+        viewCode: "View code",
+        liveSite: "Live site",
+        contactKicker: "Let’s work together",
+        contactTitle: "Have a project in mind?",
+        contactText:
+          "I am always open to discussing new ideas, collaborative projects, and opportunities to build something useful.",
+        findMeKicker: "Where to find me",
+        findMeTitle: "Let’s connect.",
+        emailCopied: "Email copied to clipboard.",
+        footerText: "Designed and built with care."
+      },
+
+      pt: {
+        navServices: "Serviços",
+        navWork: "Projetos",
+        navContact: "Contacto",
+        heroEyebrow: "Desenvolvedora Full Stack",
+        heroTitleStart: "Criando experiências",
+        heroTitleAccent: "digitais marcantes.",
+        heroDescription:
+          "Desenho e desenvolvo websites e aplicações que equilibram desempenho, clareza, estrutura e experiências centradas nas pessoas.",
+        linkedinButton: "LinkedIn",
+        getInTouch: "Entre em contacto",
+        viewWork: "Ver os meus projetos",
+        servicesKicker: "O que faço",
+        servicesTitle: "Da ideia ao produto final.",
+        servicesIntro:
+          "Uno desenvolvimento e pensamento de design para criar experiências digitais úteis, escaláveis e visualmente claras.",
+        serviceAppTitle: "Desenvolvimento de Apps",
+        serviceAppText:
+          "Desenvolvimento de aplicações PWA, Android e iOS focado nas necessidades reais dos utilizadores.",
+        serviceWebTitle: "Desenvolvimento Web",
+        serviceWebText:
+          "Websites modernos e responsivos, com arquitetura limpa e foco no desempenho.",
+        serviceDesignTitle: "Design UI/UX",
+        serviceDesignText:
+          "Interfaces e sistemas de design pensados para tornar os produtos digitais mais simples de utilizar.",
+        projectsKicker: "Projetos selecionados",
+        projectsTitle: "O que já desenvolvi.",
+        projectsIntro:
+          "Uma seleção de projetos obtida diretamente do meu perfil do GitHub.",
+        searchPlaceholder: "Pesquisar projetos...",
+        loadingProjects: "A carregar projetos do GitHub...",
+        noProjects: "Ainda não existem repositórios públicos.",
+        loadError:
+          "Não foi possível carregar os projetos agora. Visite o meu perfil do GitHub.",
+        projectFallback: "Ainda não existe uma descrição disponível.",
+        viewCode: "Ver código",
+        liveSite: "Site ao vivo",
+        contactKicker: "Vamos trabalhar juntos",
+        contactTitle: "Tem um projeto em mente?",
+        contactText:
+          "Estou sempre disponível para conversar sobre novas ideias, projetos colaborativos e oportunidades para criar algo útil.",
+        findMeKicker: "Onde me encontrar",
+        findMeTitle: "Vamos conectar-nos.",
+        emailCopied: "E-mail copiado para a área de transferência.",
+        footerText: "Desenhado e desenvolvido com cuidado."
+      },
+
+      no: {
+        navServices: "Tjenester",
+        navWork: "Prosjekter",
+        navContact: "Kontakt",
+        heroEyebrow: "Fullstack-utvikler",
+        heroTitleStart: "Jeg bygger gjennomtenkte",
+        heroTitleAccent: "digitale opplevelser.",
+        heroDescription:
+          "Jeg designer og utvikler gjennomførte nettsteder og applikasjoner som balanserer ytelse, tydelighet, struktur og brukeropplevelse.",
+        linkedinButton: "LinkedIn",
+        getInTouch: "Ta kontakt",
+        viewWork: "Se arbeidet mitt",
+        servicesKicker: "Dette gjør jeg",
+        servicesTitle: "Fra idé til ferdig produkt.",
+        servicesIntro:
+          "Jeg kombinerer utvikling og designtenkning for å skape nyttige, skalerbare og visuelt tydelige digitale opplevelser.",
+        serviceAppTitle: "Apputvikling",
+        serviceAppText:
+          "Utvikling av PWA-, Android- og iOS-applikasjoner basert på reelle brukerbehov.",
+        serviceWebTitle: "Webutvikling",
+        serviceWebText:
+          "Moderne og responsive nettsteder med ren arkitektur og fokus på ytelse.",
+        serviceDesignTitle: "UI/UX-design",
+        serviceDesignText:
+          "Gjennomtenkte grensesnitt og designsystemer som gjør digitale produkter enklere å bruke.",
+        projectsKicker: "Utvalgte prosjekter",
+        projectsTitle: "Ting jeg har bygget.",
+        projectsIntro:
+          "Et utvalg av prosjekter hentet direkte fra GitHub-profilen min.",
+        searchPlaceholder: "Søk etter prosjekter...",
+        loadingProjects: "Laster GitHub-prosjekter...",
+        noProjects: "Ingen offentlige repositorier funnet ennå.",
+        loadError:
+          "Kunne ikke laste prosjekter akkurat nå. Besøk GitHub-profilen min i stedet.",
+        projectFallback: "Ingen beskrivelse er tilgjengelig ennå.",
+        viewCode: "Se kode",
+        liveSite: "Live-nettsted",
+        contactKicker: "La oss jobbe sammen",
+        contactTitle: "Har du et prosjekt i tankene?",
+        contactText:
+          "Jeg er alltid åpen for å diskutere nye ideer, samarbeidsprosjekter og muligheter til å skape noe nyttig.",
+        findMeKicker: "Hvor du finner meg",
+        findMeTitle: "La oss holde kontakten.",
+        emailCopied: "E-postadressen er kopiert.",
+        footerText: "Designet og utviklet med omtanke."
+      }
+    };
 
     lucide.createIcons();
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -899,12 +1129,38 @@
       lucide.createIcons();
     }
 
+    function applyLanguage(language) {
+      currentLanguage = language;
+      const content = translations[language];
+
+      document.documentElement.lang = language === "pt" ? "pt" : language === "no" ? "no" : "en";
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (content[key]) {
+          element.textContent = content[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+        const key = element.dataset.i18nPlaceholder;
+        if (content[key]) {
+          element.placeholder = content[key];
+        }
+      });
+
+      renderRepos();
+    }
+
+    document.getElementById("language-select").addEventListener("change", (event) => {
+      applyLanguage(event.target.value);
+    });
+
     async function copyEmail() {
       const status = document.getElementById("copy-status");
 
       try {
         await navigator.clipboard.writeText(email);
-        status.textContent = "Email copied to clipboard.";
       } catch (error) {
         const textArea = document.createElement("textarea");
         textArea.value = email;
@@ -912,8 +1168,9 @@
         textArea.select();
         document.execCommand("copy");
         textArea.remove();
-        status.textContent = "Email copied to clipboard.";
       }
+
+      status.textContent = translations[currentLanguage].emailCopied;
 
       setTimeout(() => {
         status.textContent = "";
@@ -936,6 +1193,8 @@
       observer.observe(section);
     });
 
+    let repositories = [];
+
     async function loadRepos() {
       const container = document.getElementById("repos");
 
@@ -949,70 +1208,80 @@
         }
 
         const data = await response.json();
-        const repos = data.filter((repo) => !repo.fork);
+        repositories = data.filter((repo) => !repo.fork);
+        renderRepos();
+      } catch (error) {
+        container.innerHTML = `
+          <div class="empty-state">
+            ${translations[currentLanguage].loadError}
+          </div>
+        `;
+      }
+    }
 
-        if (!repos.length) {
-          container.innerHTML =
-            '<div class="empty-state">No public repositories found yet.</div>';
-          return;
-        }
+    function renderRepos() {
+      const container = document.getElementById("repos");
+      const text = translations[currentLanguage];
 
-        container.innerHTML = "";
+      if (!repositories.length) {
+        container.innerHTML = `
+          <div class="empty-state">${text.loadingProjects}</div>
+        `;
+        return;
+      }
 
-        repos.forEach((repo) => {
-          const project = document.createElement("article");
-          project.className = "project";
+      container.innerHTML = "";
 
-          project.innerHTML = `
-            <div class="project-image">
-              <img
-                src="https://opengraph.githubassets.com/1/${username}/${repo.name}"
-                alt="Preview of ${repo.name}"
-                loading="lazy"
-              />
-            </div>
+      repositories.forEach((repo) => {
+        const project = document.createElement("article");
+        project.className = "project";
 
-            <div class="project-content">
-              <div class="project-meta">${repo.language || "Project"}</div>
-              <h3>${repo.name}</h3>
-              <p>${repo.description || "No description available yet."}</p>
+        project.innerHTML = `
+          <div class="project-image">
+            <img
+              src="https://opengraph.githubassets.com/1/${username}/${repo.name}"
+              alt="Preview of ${repo.name}"
+              loading="lazy"
+            />
+          </div>
 
-              <div class="project-actions">
+          <div class="project-content">
+            <div class="project-meta">${repo.language || "Project"}</div>
+            <h3>${repo.name}</h3>
+            <p>${repo.description || text.projectFallback}</p>
+
+            <div class="project-actions">
+              <a
+                class="project-link"
+                href="${repo.html_url}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ${text.viewCode} <i data-lucide="arrow-up-right"></i>
+              </a>
+
+              ${
+                repo.homepage
+                  ? `
                 <a
                   class="project-link"
-                  href="${repo.html_url}"
+                  href="${repo.homepage}"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  View code <i data-lucide="arrow-up-right"></i>
+                  ${text.liveSite} <i data-lucide="external-link"></i>
                 </a>
-
-                ${
-                  repo.homepage
-                    ? `
-                  <a
-                    class="project-link"
-                    href="${repo.homepage}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Live site <i data-lucide="external-link"></i>
-                  </a>
-                `
-                    : ""
-                }
-              </div>
+              `
+                  : ""
+              }
             </div>
-          `;
+          </div>
+        `;
 
-          container.appendChild(project);
-        });
+        container.appendChild(project);
+      });
 
-        lucide.createIcons();
-      } catch (error) {
-        container.innerHTML =
-          '<div class="empty-state">Unable to load projects right now. Please visit my GitHub profile instead.</div>';
-      }
+      lucide.createIcons();
     }
 
     loadRepos();
@@ -1027,4 +1296,3 @@
     });
   </script>
 </body>
-</html>
