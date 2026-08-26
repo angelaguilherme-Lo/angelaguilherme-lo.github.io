@@ -1,8 +1,5 @@
 # Angela Guilherme — Full Stack Developer Portfolio
 
-A modern, Apple-inspired portfolio with a cinematic interface, smooth scrolling, and a demo e-commerce experience.
-Designed with clarity, performance, and refined UI principles.
-
 ---
 
 ## <i data-lucide="layout-dashboard"></i> Features
